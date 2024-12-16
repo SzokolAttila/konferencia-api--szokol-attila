@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreRegistrationRequest;
 use App\Http\Resources\RegistrationResource;
 use App\Models\Registration;
 use Illuminate\Http\JsonResponse;
@@ -46,5 +47,10 @@ class RegistrationController extends Controller
     public function count() : int
     {
         return Registration::count();
+    }
+
+    public function store(StoreRegistrationRequest $request) : JsonResource
+    {
+        return new RegistrationResource(Registration::create($request->validated()));
     }
 }
